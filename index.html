@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConectaGirardot - Plataforma de Gestión de Bienes y Servicios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        :root {
+            --primary-color: #2c7be7;
+            --secondary-color: #fa0505;
+            --accent-color: #da1414;
+            --dark-color: #2c3e50;
+            --light-bg: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .navbar {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.98) !important;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: var(--primary-color) !important;
+            letter-spacing: -1px;
+        }
+        
+        .brand-accent {
+            color: var(--accent-color);
+        }
+        
+        .nav-link {
+            font-weight: 600;
+            color: #555 !important;
+            margin: 0 0.5rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #9b59b6 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: white;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-content p {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+        
+        .btn-hero {
+            background: var(--accent-color);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: none;
+            box-shadow: 0 10px 30px rgba(243, 156, 18, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-hero:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(243, 156, 18, 0.4);
+            background: #e67e22;
+        }
+        
+        .btn-outline-hero {
+            border: 2px solid white;
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            margin-left: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-hero:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+        
+        .hero-image {
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .phone-mockup {
+            background: white;
+            border-radius: 40px;
+            padding: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        
+        .phone-screen {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 30px;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .problem-section {
+            padding: 6rem 0;
+            background: var(--light-bg);
+        }
+        
+        .problem-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            height: 100%;
+            border-left: 5px solid var(--secondary-color);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .problem-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .icon-problem {
+            width: 70px;
+            height: 70px;
+            background: rgba(231, 76, 60, 0.1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary-color);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .objetivos-section {
+            padding: 6rem 0;
+            background: white;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #1a5276;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: #3498db;
+            border-radius: 2px;
+        }
+        
+        .objetivo-central {
+            background: linear-gradient(135deg, #1a5276 0%, #2980b9 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .objetivo-central::before {
+            content: '★';
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 4rem;
+            opacity: 0.1;
+        }
+        
+        .objetivo-central .label {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+        
+        .objetivo-central h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .objetivo-central p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+        
+        .objetivos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .objetivo-card {
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 5px solid #3498db;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .objetivo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+        
+        .objetivo-card .numero {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: #3498db;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+        
+        .objetivo-card h4 {
+            color: #1a5276;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        .objetivo-card p {
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        .solution-section {
+            padding: 6rem 0;
+            background: var(--light-bg);
+        }
+        
+        .solution-card {
+            background: linear-gradient(135deg, var(--primary-color), #8e44ad);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            color: white;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .solution-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .solution-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+        
+        .solution-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+        
+        .features-grid {
+            padding: 6rem 0;
+            background: white;
+        }
+        
+        .feature-item {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon-circle {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), #9b59b6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .tech-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+        }
+        
+        .tech-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .tech-card:hover {
+            background: rgba(255,255,255,0.15);
+            transform: scale(1.05);
+        }
+        
+        .tech-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+        
+        .impact-section {
+            padding: 6rem 0;
+            background: white;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            display: block;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        /* Team Section */
+        .team-section {
+            padding: 6rem 0;
+            background: var(--light-bg);
+        }
+        
+        .team-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .team-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .team-role {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .cta-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, var(--accent-color) 0%, #e67e22 100%);
+            text-align: center;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .btn-outline-hero {
+                margin-left: 0;
+                margin-top: 1rem;
+                display: block;
+            }
+            
+            .hero-buttons {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .objetivo-central h3 {
+                font-size: 1.4rem;
+            }
+            
+            .objetivos-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-hexagon-fill me-2 brand-accent"></i>B&S<span class="brand-accent">GO</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#problema">El Problema</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#objetivos">Objetivos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#solucion">Solución</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#caracteristicas">Características</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tecnologia">Tecnología</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#equipo">Equipo</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a href="#contacto" class="btn btn-primary rounded-pill px-4" style="background: var(--primary-color); border: none;">
+                            Únete Ahora
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section" id="inicio">
+        <div class="hero-pattern"></div>
+        <div class="container position-relative">
+            <div class="row align-items-center min-vh-100 pt-5">
+                <div class="col-lg-6 hero-content">
+                    <div class="badge bg-white text-primary mb-3 px-3 py-2 rounded-pill fw-bold">
+                        <i class="bi bi-geo-alt-fill me-1"></i> Proyecto para Girardot, Cundinamarca
+                    </div>
+                    <h1>Conectamos la <span style="color: var(--accent-color);">Demanda</span> con la <span style="color: var(--accent-color);">Oferta</span> de Servicios Técnicos</h1>
+                    <p>La plataforma innovadora que centraliza la contratación de bienes y servicios en Girardot, eliminando la informalidad y garantizando calidad mediante verificación de antecedentes y sistema de calificación.</p>
+                    <div class="hero-buttons">
+                        <a href="#contacto" class="btn btn-hero">
+                            <i class="bi bi-rocket-takeoff me-2"></i>Únete a Nosotros
+                        </a>
+                        <a href="https://youtu.be/WgOXMpzu7bg" target="_blank" class="btn btn-outline-hero">
+                            <i class="bi bi-play-circle me-2"></i>Ver Video
+                        </a>
+                    </div>
+                    
+                    <div class="mt-5 d-flex align-items-center gap-4">
+                        <div>
+                            <i class="bi bi-shield-check text-success fs-4"></i>
+                            <small class="d-block text-white-50">Verificación de antecedentes</small>
+                        </div>
+                        <div>
+                            <i class="bi bi-star-fill text-warning fs-4"></i>
+                            <small class="d-block text-white-50">Sistema de calificación</small>
+                        </div>
+                        <div>
+                            <i class="bi bi-chat-dots text-info fs-4"></i>
+                            <small class="d-block text-white-50">Chatbot con IA</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 hero-image d-none d-lg-block">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <i class="bi bi-person-workspace text-primary" style="font-size: 4rem;"></i>
+                            <h4 class="mt-3 text-dark fw-bold">¿Buscas un servicio técnico?</h4>
+                            <p class="text-muted">Electricistas, plomeros, carpinteros y más...</p>
+                            <div class="mt-3 w-100">
+                                <div class="bg-white rounded-pill p-2 mb-2 shadow-sm d-flex align-items-center px-3">
+                                    <i class="bi bi-search text-muted me-2"></i>
+                                    <small class="text-muted">Buscar servicio...</small>
+                                </div>
+                                <div class="row g-2 mt-2">
+                                    <div class="col-4">
+                                        <div class="bg-primary text-white rounded p-2 text-center small">
+                                            <i class="bi bi-lightning-charge d-block"></i>
+                                            Eléctrico
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="bg-info text-white rounded p-2 text-center small">
+                                            <i class="bi bi-droplet d-block"></i>
+                                            Plomería
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="bg-success text-white rounded p-2 text-center small">
+                                            <i class="bi bi-hammer d-block"></i>
+                                            Carpintería
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="problem-section" id="problema">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <span class="badge bg-danger mb-3 px-3 py-2">EL PROBLEMA</span>
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--dark-color);">La Contratación en Girardot es <span class="text-danger">Ineficiente</span></h2>
+                    <p class="lead text-muted">La dispersión de información dificulta la conexión entre quienes necesitan servicios y quienes los ofrecen, generando informalidad y riesgos para ambas partes.</p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="problem-card">
+                        <div class="icon-problem" style="background: rgba(234, 67, 53, 0.1); color: #ea4335;">
+                            <i class="bi bi-geo-alt-fill" style="font-size: 2.5rem;"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Dispersión Geográfica</h4>
+                        <p class="text-muted">Los prestadores de servicios están dispersos por toda la ciudad, haciendo difícil encontrarlos cuando se necesitan urgentemente.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="problem-card">
+                        <div class="icon-problem">
+                            <i class="bi bi-shield-x"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Falta de Confianza</h4>
+                        <p class="text-muted">No existe un sistema de verificación de antecedentes ni calificación, generando riesgos de seguridad y calidad en los servicios.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="problem-card">
+                        <div class="icon-problem">
+                            <i class="bi bi-cash-coin"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Economía Informal</h4>
+                        <p class="text-muted">Alta informalidad en la prestación de servicios técnicos que limita el crecimiento económico y la protección laboral.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-12 mb-4">
+                    <div class="bg-white rounded-4 p-4 shadow-sm border-start border-4 border-info">
+                        <div class="d-flex align-items-start gap-3">
+                            <i class="bi bi-lightbulb-fill text-warning fs-1"></i>
+                            <div>
+                                <h4 class="fw-bold text-info">Idea de Investigación</h4>
+                                <p class="mb-0 text-muted">En Girardot existe una necesidad evidente de mejorar la conexión entre quienes buscan servicios específicos (empresariales o particulares) y los proveedores de esos servicios, especialmente en oficios y trabajos técnicos. La falta de una plataforma centralizada hace que los procesos de contratación sean lentos y complicados, generando pérdidas de tiempo, costos adicionales y falta de confianza en la calidad del servicio. El problema radica en la dispersión de la información, la falta de registros actualizados y la carencia de herramientas tecnológicas accesibles para la comunidad local.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="bg-white rounded-4 p-4 shadow-sm border-start border-4 border-primary">
+                        <div class="d-flex align-items-start gap-3">
+                            <i class="bi bi-question-circle-fill text-primary fs-1"></i>
+                            <div>
+                                <h4 class="fw-bold">Pregunta de Investigación</h4>
+                                <p class="mb-0 text-muted fst-italic">"¿Cómo impacta una plataforma digital en Girardot la transparencia, eficiencia y formalización de la contratación de servicios técnicos, incluyendo a oferentes con bajo acceso tecnológico?"</p>
+                                <small class="text-primary fw-bold">- Ruiz Murillo & Tovar Hurtado, 2024</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="objetivos-section" id="objetivos">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nuestros Objetivos</h2>
+            </div>
+
+            <div class="objetivo-central">
+                <span class="label">Objetivo Central</span>
+                <h3>Conectar la comunidad de Girardot con servicios de calidad</h3>
+                <p>Desarrollar una plataforma digital centralizada en Girardot que facilite la conexión eficiente entre usuarios que requieren servicios específicos y prestadores de dichos servicios, especialmente en oficios y trabajos técnicos, mediante el uso de tecnologías innovadoras que optimicen los procesos de contratación, mejoren la calidad del servicio, reduzcan costos adicionales y aumenten la transparencia en las transacciones, a la vez que se resuelve la dispersión de información y la falta de acceso a herramientas tecnológicas adecuadas para la comunidad local.</p>
+            </div>
+
+            <div class="objetivos-grid">
+                
+                <div class="objetivo-card">
+                    <div class="numero">1</div>
+                    <h4>Base de Datos Robusta de Prestadores</h4>
+                    <p>Crear una base de datos robusta que agrupe a prestadores de servicios locales, incluyendo trabajadores independientes y pequeñas empresas, clasificados por tipo de servicio, ubicación y especialidad, para facilitar su búsqueda y selección por parte de los usuarios.</p>
+                </div>
+
+                <div class="objetivo-card">
+                    <div class="numero">2</div>
+                    <h4>Sistema de Búsqueda Avanzado</h4>
+                    <p>Desarrollar un sistema de búsqueda avanzado dentro de la plataforma, que permita a los usuarios localizar rápidamente a los profesionales según criterios como especialidad, disponibilidad, ubicación geográfica y valoraciones previas de otros clientes.</p>
+                </div>
+
+                <div class="objetivo-card">
+                    <div class="numero">3</div>
+                    <h4>Sistema de Calificación y Reseñas</h4>
+                    <p>Implementar un sistema de calificación y reseñas para que los usuarios puedan evaluar la calidad de los servicios recibidos, lo que fomentará la confianza en la plataforma y en los profesionales registrados.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="solution-section" id="solucion">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <span class="badge bg-primary mb-3 px-3 py-2">NUESTRA SOLUCIÓN</span>
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--primary-color);">Una Plataforma que <span class="text-warning">Centraliza</span> y <span class="text-warning">Verifica</span></h2>
+                    <p class="lead text-muted">Desarrollamos un ecosistema digital completo que conecta oferentes y demandantes de forma segura, transparente y eficiente.</p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="solution-card">
+                        <div class="solution-icon">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Conexión Directa</h4>
+                        <p class="mb-0 opacity-75">Centralización de la oferta y demanda de servicios técnicos en un solo lugar.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="solution-card">
+                        <div class="solution-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Verificación de Antecedentes</h4>
+                        <p class="mb-0 opacity-75">Todos los prestadores son verificados para garantizar seguridad y confianza.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="solution-card">
+                        <div class="solution-icon">
+                            <i class="bi bi-star-half"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Sistema de Calificación</h4>
+                        <p class="mb-0 opacity-75">Calificaciones y reseñas reales para mantener la calidad del servicio.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="solution-card">
+                        <div class="solution-icon">
+                            <i class="bi bi-file-earmark-text"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Formalización</h4>
+                        <p class="mb-0 opacity-75">Mecanismos seguros que reducen la informalidad y mejoran la competitividad.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-grid" id="caracteristicas">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--dark-color);">Características Principales</h2>
+                    <p class="lead text-muted">Todo lo que necesitas para contratar o ofrecer servicios técnicos de forma segura</p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-item">
+                        <div class="feature-icon-circle">
+                            <i class="bi bi-search-heart"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Búsqueda Inteligente</h4>
+                        <p class="text-muted mb-0">Encuentra prestadores por ubicación, especialidad, calificación y disponibilidad en tiempo real.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-item">
+                        <div class="feature-icon-circle">
+                            <i class="bi bi-chat-square-dots"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Chatbot con IA</h4>
+                        <p class="text-muted mb-0">Asistente virtual que guía a usuarios con bajo acceso tecnológico durante todo el proceso.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-item">
+                        <div class="feature-icon-circle">
+                            <i class="bi bi-calendar-check"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Agendamiento Integrado</h4>
+                        <p class="text-muted mb-0">Sistema de citas que permite programar servicios según la disponibilidad del prestador.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-item">
+                        <div class="feature-icon-circle">
+                            <i class="bi bi-credit-card-2-front"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Pagos Seguros</h4>
+                        <p class="text-muted mb-0">Pasarela de pagos integrada que protege tanto al cliente como al prestador del servicio.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-item">
+                        <div class="feature-icon-circle">
+                            <i class="bi bi-geo-alt-fill"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Geolocalización</h4>
+                        <p class="text-muted mb-0">Encuentra los prestadores más cercanos a tu ubicación con mapas interactivos.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-item">
+                        <div class="feature-icon-circle">
+                            <i class="bi bi-journal-text"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Historial y Reportes</h4>
+                        <p class="text-muted mb-0">Lleva registro de todos tus servicios, facturas y genera reportes para empresas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="tech-section" id="tecnologia">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <span class="badge bg-warning text-dark mb-3 px-3 py-2">TECNOLOGÍA</span>
+                    <h2 class="display-5 fw-bold mb-4">Tecnologías Emergentes</h2>
+                    <p class="lead opacity-75">Utilizamos las últimas tecnologías para garantizar una experiencia fluida, segura e inteligente.</p>
+                </div>
+            </div>
+            
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4">
+                    <div class="tech-card">
+                        <div class="tech-icon">
+                            <i class="bi bi-cpu"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Inteligencia Artificial</h4>
+                        <p class="mb-0 opacity-75">Algoritmos de matching que conectan al cliente ideal con el prestador perfecto según necesidades específicas.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="tech-card">
+                        <div class="tech-icon">
+                            <i class="bi bi-robot"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Chatbot Avanzado</h4>
+                        <p class="mb-0 opacity-75">Asistente conversacional con NLP que facilita el uso de la plataforma a personas con poca experiencia tecnológica.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="tech-card">
+                        <div class="tech-icon">
+                            <i class="bi bi-shield-lock"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Blockchain (Futuro)</h4>
+                        <p class="mb-0 opacity-75">Verificación descentralizada de antecedentes y contratos inteligentes para pagos automáticos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="impact-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--primary-color);">Impacto Esperado</h2>
+                    <p class="lead text-muted">Nuestra plataforma transformará la economía local de Girardot</p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-3 col-6">
+                    <div class="stat-card">
+                        <span class="stat-number">70%</span>
+                        <span class="stat-label">Reducción de informalidad</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-card">
+                        <span class="stat-number">50%</span>
+                        <span class="stat-label">Ahorro en tiempo de búsqueda</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-card">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Prestadores verificados</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-card">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Disponibilidad del servicio</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section" id="equipo">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <span class="badge bg-primary mb-3 px-3 py-2">EQUIPO</span>
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--dark-color);">Quienes Somos</h2>
+                    <p class="lead text-muted">Estudiantes de Ingeniería de Software comprometidos con el desarrollo tecnológico de Girardot</p>
+                </div>
+            </div>
+            
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-5">
+                    <div class="team-card">
+                        <div class="bg-light" style="height: 250px; display: flex; align-items: center; justify-content: center;">
+                            <i class="bi bi-person-circle text-secondary" style="font-size: 6rem;"></i>
+                        </div>
+                        <div class="team-info">
+                            <h4 class="fw-bold mb-1">David Santiago Ruiz Murillo</h4>
+                            <p class="team-role mb-2">Ingeniería de Software</p>
+                            <p class="text-muted small mb-3">Seccional Girardot</p>
+                            <div class="social-links justify-content-center">
+                                <a href="#"><i class="bi bi-linkedin"></i></a>
+                                <a href="#"><i class="bi bi-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="team-card">
+                        <div class="bg-light" style="height: 250px; display: flex; align-items: center; justify-content: center;">
+                            <i class="bi bi-person-circle text-secondary" style="font-size: 6rem;"></i>
+                        </div>
+                        <div class="team-info">
+                            <h4 class="fw-bold mb-1">Ashley Natalia Tovar Hurtado</h4>
+                            <p class="team-role mb-2">Ingeniería de Software</p>
+                            <p class="text-muted small mb-3">Seccional Girardot</p>
+                            <div class="social-links justify-content-center">
+                                <a href="#"><i class="bi bi-linkedin"></i></a>
+                                <a href="#"><i class="bi bi-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <div class="bg-white rounded-4 p-4 shadow-sm d-inline-block">
+                        <p class="mb-2 text-muted">Proyecto académico desarrollado bajo la referencia:</p>
+                        <p class="mb-0 fst-italic small">Angarita, V. Daniel, A. (2023). Los retos legales de la sindicalización de trabajadores de plataformas digitales en Colombia. Universidad Javeriana.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="contacto">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="display-4 fw-bold mb-4">¿Quieres ser parte del cambio?</h2>
+                    <p class="lead mb-5 opacity-75">Únete a nuestra lista de espera y sé de los primeros en utilizar la plataforma cuando esté disponible. Ya sea que busques servicios o quieras ofrecerlos, queremos conocerte.</p>
+                    
+                    <form class="row g-3 justify-content-center mb-5">
+                        <div class="col-md-4">
+                            <input type="text" class="form-control form-control-lg rounded-pill" placeholder="Tu nombre">
+                        </div>
+                        <div class="col-md-4">
+                            <input type="email" class="form-control form-control-lg rounded-pill" placeholder="Tu correo electrónico">
+                        </div>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-dark btn-lg rounded-pill w-100 fw-bold">
+                                <i class="bi bi-send me-2"></i>Enviar
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <div class="row justify-content-center g-4">
+                        <div class="col-md-4">
+                            <div class="bg-white bg-opacity-20 rounded-4 p-4 backdrop-blur">
+                                <i class="bi bi-person-badge fs-1 mb-3 d-block"></i>
+                                <h5 class="fw-bold">Soy Prestador</h5>
+                                <p class="small mb-3 opacity-75">Quiero ofrecer mis servicios técnicos de forma formal y segura</p>
+                                <a href="#" class="btn btn-light rounded-pill btn-sm">Registrarme como Oferente</a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="bg-white bg-opacity-20 rounded-4 p-4 backdrop-blur">
+                                <i class="bi bi-house-door fs-1 mb-3 d-block"></i>
+                                <h5 class="fw-bold">Soy Cliente</h5>
+                                <p class="small mb-3 opacity-75">Necesito contratar servicios técnicos verificados y confiables</p>
+                                <a href="#" class="btn btn-light rounded-pill btn-sm">Registrarme como Cliente</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
